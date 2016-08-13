@@ -1,4 +1,4 @@
-module Hello.Greeter.Class
+module Hello.Greeter
   ( Greeter(..)
   ) where
 

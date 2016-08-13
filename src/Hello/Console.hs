@@ -1,9 +1,9 @@
-module Hello.Console.Class
+module Hello.Console
   ( Console(..)
   ) where
 
 import Data.Text (Text)
 
 class Monad m => Console m where
-  sysArgs :: m [Text]
+  sysArg :: m Text
   stdout :: Text -> m ()

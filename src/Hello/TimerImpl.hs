@@ -1,20 +1,18 @@
-module Hello.Timer.Impl
+module Hello.TimerImpl
   ( measureTime
   ) where
 
-import qualified Data.Text as T
 import Control.Monad.IO.Class (MonadIO(..))
 import Data.Functor (void)
-import Data.Time.Clock (diffUTCTime)
+import Data.Time.Clock (diffUTCTime, UTCTime, NominalDiffTime)
 import Data.Text.Conversions (toText)
 
-import Hello.Console.Class
-import Hello.Clock.Class
+import Hello.Console (Console(..))
+import Hello.Clock (Clock(..))
 
 measureTime :: (Clock m, Console m) => m () -> m ()
 measureTime f = do
   before <- getCurrentTime
-  void f
+  f
   after <- getCurrentTime
-  let diff = diffUTCTime after before
-  stdout $ toText (show diff)
+  stdout . toText . show $ diffUTCTime after before
