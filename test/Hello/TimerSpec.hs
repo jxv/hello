@@ -1,40 +1,32 @@
 module Hello.TimerSpec (spec) where
 
 import Test.Hspec
+
+import Prelude hiding (log)
+import Control.Monad.Trans.Class (lift)
 import Control.Monad.TestFixture
-import Data.Text (Text)
-import Data.Time.Clock
-import Data.Time.Calendar
+import Control.Monad.TestFixture.TH
+import Data.Time.Clock (UTCTime(..))
+import Data.Time.Calendar (Day(..))
 
-import Hello.Fixture
-import Hello.Timer.Impl
+import Hello.TimerImpl (measureTime)
+import Hello.Console (Console(..))
+import Hello.Clock (Clock(..))
 
-mkUTCTime :: Integer -> DiffTime -> UTCTime
-mkUTCTime day diffTime = UTCTime (ModifiedJulianDay day) diffTime
-
-data Effect
-  = GetCurrentTime UTCTime
-  | Stdout Text
-  | CalledFunction
-  deriving (Show, Eq)
-
-fixture :: Fixture (WS [Effect] Int)
-fixture = def
-  { _getCurrentTime = do
-      calls <- get
-      put (calls + 1)
-      let diffTime = sum (replicate calls 1000)
-      let utcTime = mkUTCTime 0 diffTime
-      tell [GetCurrentTime utcTime]
-      return utcTime
-  , _stdout = \msg -> tell [Stdout msg]
-  }
+mkFixture "Fixture" [''Console, ''Clock]
 
 spec :: Spec
 spec = do
   describe "measureTime" $ do
-    it "should ensure the logic has the expected flow with a function call" $ do
-      let call = tell [CalledFunction]
-      let actual = logTestFixture (measureTime call) fixture 0
-      let expected = [GetCurrentTime (mkUTCTime 0 0), CalledFunction, GetCurrentTime (mkUTCTime 0 1000), Stdout "1000s"]
-      actual `shouldBe` expected
+    it "should call getCurrentTime twice and stdout the difference" $ do
+      let fixture = def
+            { _getCurrentTime = do
+                log "getCurrentTime"
+                return $ UTCTime (ModifiedJulianDay 0) 0
+            , _stdout = \msg -> do
+                log "stdout"
+                lift $ msg `shouldBe` "0s"
+            }
+      let function = log "function"
+      captured <- logTestFixtureT (measureTime function) fixture
+      captured `shouldBe` ["getCurrentTime", "function", "getCurrentTime", "stdout"]

@@ -29,29 +29,32 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    Hello.Application
-    Hello.Exit.Class
-    Hello.Exit.Impl
-    Hello.Clock.Class
-    Hello.Configuration.Class
-    Hello.Configuration.Impl
-    Hello.Console.Class
-    Hello.Console.Impl
-    Hello.FileSystem.Class
-    Hello.FileSystem.Impl
-    Hello.Greeter.Class
-    Hello.Greeter.Impl
-    Hello.Timer.Class
-    Hello.Timer.Impl
+    Hello.Main
+    Hello.App
+    Hello.Clock
+    Hello.ClockImpl
+    Hello.Configuration
+    Hello.ConfigurationImpl
+    Hello.Console
+    Hello.ConsoleImpl
+    Hello.FileSystem
+    Hello.FileSystemImpl
+    Hello.Greeter
+    Hello.GreeterImpl
+    Hello.Timer
+    Hello.TimerImpl
   build-depends:
       base >= 4.7 && < 5
     , text
     , mtl
+    , safe-exceptions
     , transformers
     , time
     , text-conversions
   default-extensions:
     OverloadedStrings
+    FlexibleContexts
+    GeneralizedNewtypeDeriving
   ghc-options:
     -Werror
   default-language:
@@ -62,8 +65,6 @@ executable hello-exe
     app
   main-is:
     Main.hs
-  other-modules:
-    Wiring
   ghc-options:
     -threaded -rtsopts -with-rtsopts=-N
   build-depends:
@@ -93,6 +94,7 @@ test-suite hello-test
     , test-fixture
     , hspec
     , text
+    , text-conversions
     , transformers
     , mtl
     , time
@@ -105,6 +107,7 @@ test-suite hello-test
     TypeSynonymInstances
     FlexibleInstances
     OverloadedStrings
+    TemplateHaskell
 
 source-repository head
   type:

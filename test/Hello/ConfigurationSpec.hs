@@ -1,32 +1,35 @@
 module Hello.ConfigurationSpec (spec) where
 
 import Test.Hspec
+
+import Prelude hiding (log)
+import Control.Monad.Trans.Class (lift)
 import Control.Monad.TestFixture
+import Control.Monad.TestFixture.TH
 
-import Hello.Fixture
-import Hello.Configuration.Impl
+import Hello.ConfigurationImpl (target, initText)
+import Hello.Console (Console(..))
+import Hello.FileSystem (FileSystem(..))
 
-base :: Fixture (WS () ())
-base = def
-  { _sysArgs = return []
-  , _readFile = \_ -> return Nothing
-  , _errorExit = \_ -> return ()
-  } 
+mkFixture "Fixture" [''Console, ''FileSystem]
 
 spec :: Spec
 spec = do
+  describe "initText" $ do
+    it "should be empty when input is empty" $ do
+      initText "" `shouldBe` ""
+
+    it "should drop the last character when input is non-empty" $ do
+      initText "12345" `shouldBe` "1234"
+
   describe "target" $ do
-    it "should fail to open a file without path" $ do
-      let (Left actual, _) = evalTestFixture target base ()
-      let expected = "No file path provided."
-      actual `shouldBe` expected
-    it "should fail to open a file with bad path" $ do
-      let fixture = base { _sysArgs = return ["bad_file.txt"] }
-      let (Left actual, _) = evalTestFixture target fixture ()
-      let expected = "Can't open file: bad_file.txt"
-      actual `shouldBe` expected
-    it "should open a file with return its contents" $ do
-      let fixture = base { _sysArgs = return ["file.txt"], _readFile = \_ -> return $ Just "content\n" }
-      let (Right actual, _) = evalTestFixture target fixture ()
-      let expected = "content"
-      actual `shouldBe` expected
+    it "should call greet with stubbed target's name" $ do
+      let fixture = def
+            { _sysArg = return "file.txt"
+            , _readFile = \filePath -> do
+                lift $ filePath `shouldBe` "file.txt"
+                log "readFile"
+                return "contents"
+            }
+      captured <- logTestFixtureT target fixture
+      captured `shouldBe` ["readFile"]

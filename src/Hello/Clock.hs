@@ -1,4 +1,4 @@
-module Hello.Clock.Class
+module Hello.Clock
   ( Clock(..)
   ) where
 

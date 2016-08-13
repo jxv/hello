@@ -1,4 +1,4 @@
-module Hello.Timer.Class
+module Hello.Timer
   ( Timer(..)
   ) where
 

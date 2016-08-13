@@ -1,12 +1,13 @@
 resolver:
-  lts-5.17
+  lts-6.11
 
 packages:
 - '.'
 
 extra-deps:
-  [ test-fixture-0.1.0.0
-  , text-conversions-0.2.0
+  [ safe-exceptions-0.1.4.0
+  , test-fixture-0.4.0.0
+  , text-conversions-0.3.0
   ]
 
 flags:

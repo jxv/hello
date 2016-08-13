@@ -1,8 +1,8 @@
-module Hello.Configuration.Class
+module Hello.Configuration
   ( Configuration(..)
   ) where
 
 import Data.Text (Text)
 
 class Monad m => Configuration m where
-  target :: m (Either Text Text)
+  target :: m Text
