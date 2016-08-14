@@ -1,4 +1,4 @@
-module Hello.MainSpec (spec) where
+module Test.Hello.MainSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)

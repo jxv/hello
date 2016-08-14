@@ -1,4 +1,4 @@
-module Hello.TimerSpec (spec) where
+module Test.Hello.TimerSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
