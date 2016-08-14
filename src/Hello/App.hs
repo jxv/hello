@@ -14,12 +14,14 @@ import qualified Hello.ClockImpl as Impl
 import qualified Hello.ConfigurationImpl as Impl
 import qualified Hello.GreeterImpl as Impl
 import qualified Hello.FileSystemImpl as Impl
+import qualified Hello.NotifierImpl as Impl
 import qualified Hello.TimerImpl as Impl
 import Hello.Clock (Clock(..))
 import Hello.Console (Console(..))
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.FileSystem (FileSystem(..))
+import Hello.Notifier (Notifier(..))
 import Hello.Timer (Timer(..))
 
 newtype App a = App { unApp :: ExceptT Text IO a }
@@ -45,6 +47,9 @@ instance FileSystem App where
 
 instance Greeter App where
   greet = Impl.greet
+
+instance Notifier App where
+  timeTaken = Impl.timeTaken
 
 instance Timer App where
   measureTime = Impl.measureTime

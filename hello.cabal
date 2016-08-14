@@ -37,6 +37,8 @@ library
     Hello.ConfigurationImpl
     Hello.Console
     Hello.ConsoleImpl
+    Hello.Notifier
+    Hello.NotifierImpl
     Hello.FileSystem
     Hello.FileSystemImpl
     Hello.Greeter

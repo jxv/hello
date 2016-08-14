@@ -9,10 +9,10 @@ import Data.Time.Calendar (Day(..))
 import Test.Hspec
 
 import Hello.TimerImpl (measureTime)
-import Hello.Console (Console(..))
 import Hello.Clock (Clock(..))
+import Hello.Notifier (Notifier(..))
 
-mkFixture "Fixture" [''Console, ''Clock]
+mkFixture "Fixture" [''Clock, ''Notifier]
 
 spec :: Spec
 spec = do
@@ -22,10 +22,10 @@ spec = do
             { _getCurrentTime = do
                 log "getCurrentTime"
                 return $ UTCTime (ModifiedJulianDay 0) 0
-            , _stdout = \msg -> do
-                log "stdout"
-                lift $ msg `shouldBe` "0s"
+            , _timeTaken = \nominalDiffTime -> do
+                log "timeTaken"
+                lift $ nominalDiffTime `shouldBe` 0
             }
       let function = log "function"
       captured <- logTestFixtureT (measureTime function) fixture
-      captured `shouldBe` ["getCurrentTime", "function", "getCurrentTime", "stdout"]
+      captured `shouldBe` ["getCurrentTime", "function", "getCurrentTime", "timeTaken"]
