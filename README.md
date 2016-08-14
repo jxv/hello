@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jxv/hello-hs.svg?branch=master)](https://travis-ci.org/jxv/hello-hs)
+
 README taken from [https://github.com/SeanShubin/hello#readme](https://github.com/SeanShubin/hello#readme)
 
 # Hello Sample
