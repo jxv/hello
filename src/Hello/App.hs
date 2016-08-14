@@ -8,7 +8,6 @@ import Control.Monad.IO.Class (MonadIO)
 import Control.Exception.Safe (MonadCatch, MonadThrow)
 import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
-import Data.Time.Clock (UTCTime)
 
 import qualified Hello.ConsoleImpl as Impl
 import qualified Hello.ClockImpl as Impl
