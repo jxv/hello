@@ -1,11 +1,10 @@
 module Hello.ConfigurationSpec (spec) where
 
-import Test.Hspec
-
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
+import Test.Hspec
 
 import Hello.ConfigurationImpl (target, initText)
 import Hello.Console (Console(..))
@@ -25,11 +24,13 @@ spec = do
   describe "target" $ do
     it "should call greet with stubbed target's name" $ do
       let fixture = def
-            { _sysArg = return "file.txt"
+            { _sysArg = do
+                log "sysArg"
+                return "file.txt"
             , _readFile = \filePath -> do
                 lift $ filePath `shouldBe` "file.txt"
                 log "readFile"
                 return "contents"
             }
       captured <- logTestFixtureT target fixture
-      captured `shouldBe` ["readFile"]
+      captured `shouldBe` ["sysArg", "readFile"]

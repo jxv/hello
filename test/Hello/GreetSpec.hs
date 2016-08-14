@@ -1,11 +1,10 @@
 module Hello.GreetSpec (spec) where
 
-import Test.Hspec
-
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
+import Test.Hspec
 
 import Hello.GreeterImpl (greet)
 import Hello.Console (Console(..))

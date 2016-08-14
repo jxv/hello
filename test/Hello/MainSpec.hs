@@ -1,11 +1,10 @@
 module Hello.MainSpec (spec) where
 
-import Test.Hspec
-
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
 import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
+import Test.Hspec
 
 import Hello.Main (main)
 import Hello.Configuration (Configuration(..))
@@ -19,11 +18,15 @@ spec = do
   describe "main" $ do
     it "should call greet with stubbed target's name" $ do
       let fixture = def
-            { _target = return "NAME"
+            { _target = do
+                log "target"
+                return "NAME"
             , _greet = \name -> do
-                lift $ name `shouldBe` "NAME"
                 log "greet"
-            , _measureTime = \f -> f
+                lift $ name `shouldBe` "NAME"
+            , _measureTime = \f -> do
+                log "measureTime"
+                f
             }
       captured <- logTestFixtureT main fixture
-      captured `shouldBe` ["greet"]
+      captured `shouldBe` ["target", "measureTime", "greet"]
