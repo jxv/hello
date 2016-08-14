@@ -9,6 +9,13 @@ README taken from [https://github.com/SeanShubin/hello#readme](https://github.co
     - file system
     - system clock
 
+# Steps to run
+
+```shell
+stack build
+stack exec hello-exe name.txt
+```
+
 # Specification
 - input
     - command line argument
