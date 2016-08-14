@@ -3,7 +3,7 @@ module Hello.ConfigurationImpl
   , initText
   ) where
 
-import qualified Data.Text as T
+import qualified Data.Text as T (null, init)
 import Prelude hiding (readFile)
 import Data.Text (Text)
 

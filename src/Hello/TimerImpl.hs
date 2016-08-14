@@ -2,9 +2,7 @@ module Hello.TimerImpl
   ( measureTime
   ) where
 
-import Control.Monad.IO.Class (MonadIO(..))
-import Data.Functor (void)
-import Data.Time.Clock (diffUTCTime, UTCTime, NominalDiffTime)
+import Data.Time.Clock (diffUTCTime)
 import Data.Text.Conversions (toText)
 
 import Hello.Console (Console(..))

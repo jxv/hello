@@ -15,12 +15,12 @@ import qualified Hello.ConfigurationImpl as Impl
 import qualified Hello.GreeterImpl as Impl
 import qualified Hello.FileSystemImpl as Impl
 import qualified Hello.TimerImpl as Impl
-import Hello.Clock
-import Hello.Console
-import Hello.Configuration
-import Hello.Greeter
-import Hello.FileSystem
-import Hello.Timer
+import Hello.Clock (Clock(..))
+import Hello.Console (Console(..))
+import Hello.Configuration (Configuration(..))
+import Hello.Greeter (Greeter(..))
+import Hello.FileSystem (FileSystem(..))
+import Hello.Timer (Timer(..))
 
 newtype App a = App { unApp :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)

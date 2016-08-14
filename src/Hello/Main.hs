@@ -2,8 +2,6 @@ module Hello.Main
   ( main
   ) where
 
-import Data.Text.Conversions (toText)
-
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.Timer (Timer(..))
