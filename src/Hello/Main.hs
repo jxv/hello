@@ -5,7 +5,6 @@ module Hello.Main
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.Timer (Timer(..))
-import Hello.Console (Console(..))
 
 main :: (Timer m, Greeter m, Configuration m) => m ()
 main = do
