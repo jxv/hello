@@ -29,8 +29,8 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    Hello.Main
-    Hello.App
+    Hello.Run
+    Hello.System
     Hello.Clock
     Hello.ClockImpl
     Hello.Configuration

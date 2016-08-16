@@ -1,4 +1,4 @@
-module Test.Hello.MainSpec (spec) where
+module Test.Hello.RunSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
@@ -6,7 +6,7 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import Hello.Main (main)
+import Hello.Run (run)
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.Timer (Timer(..))
@@ -16,7 +16,7 @@ mkFixture "Fixture" [''Configuration, ''Greeter,  ''Timer, ''Notifier]
 
 spec :: Spec
 spec = do
-  describe "main" $ do
+  describe "run" $ do
     it "should call greet with stubbed target's name" $ do
       let stubTarget = "NAME"
       let stubDiff = 100
@@ -33,5 +33,5 @@ spec = do
                 log "timeTaken"
                 lift $ diff `shouldBe` stubDiff
             }
-      captured <- logTestFixtureT main fixture
+      captured <- logTestFixtureT run fixture
       captured `shouldBe` ["greet", "timeTaken"]

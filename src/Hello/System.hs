@@ -1,6 +1,6 @@
-module Hello.App
-  ( App
-  , runApp
+module Hello.System
+  ( System
+  , io
   ) where
 
 import Control.Monad.Error.Class (MonadError)
@@ -24,32 +24,32 @@ import Hello.FileSystem (FileSystem(..))
 import Hello.Notifier (Notifier(..))
 import Hello.Timer (Timer(..))
 
-newtype App a = App { unApp :: ExceptT Text IO a }
+newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
 
-runApp :: App a -> IO a
-runApp f = do
-  result <- runExceptT (unApp f)
+io :: System a -> IO a
+io f = do
+  result <- runExceptT (unSystem f)
   either (error . unpack) return result
 
-instance Clock App where
+instance Clock System where
   getCurrentTime = Impl.getCurrentTime
 
-instance Console App where
+instance Console System where
   sysArg = Impl.sysArg
   stdout = Impl.stdout
 
-instance Configuration App where
+instance Configuration System where
   target = Impl.target
 
-instance FileSystem App where
+instance FileSystem System where
   readFile = Impl.readFile
 
-instance Greeter App where
+instance Greeter System where
   greet = Impl.greet
 
-instance Notifier App where
+instance Notifier System where
   timeTaken = Impl.timeTaken
 
-instance Timer App where
+instance Timer System where
   measureTime = Impl.measureTime
