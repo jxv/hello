@@ -25,12 +25,10 @@ spec = do
     it "should call greet with stubbed target's name" $ do
       let fixture = def
             { _sysArg = do
-                log "sysArg"
                 return "file.txt"
             , _readFile = \filePath -> do
                 lift $ filePath `shouldBe` "file.txt"
-                log "readFile"
-                return "contents"
+                return "contents\n"
             }
-      captured <- logTestFixtureT target fixture
-      captured `shouldBe` ["sysArg", "readFile"]
+      contents <- unTestFixtureT target fixture
+      contents `shouldBe` "contents"

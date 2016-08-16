@@ -15,10 +15,11 @@ spec :: Spec
 spec = do
   describe "greet" $ do
     it "should call stdout with hello message" $ do
+      let stubName = "NAME"
       let fixture = def
             { _stdout = \msg -> do
-                lift $ msg `shouldBe` "Hello, NAME!"
+                lift $ msg `shouldBe` ("Hello, " `mappend` stubName `mappend` "!")
                 log "stdout"
             }
-      captured <- logTestFixtureT (greet "NAME") fixture
+      captured <- logTestFixtureT (greet stubName) fixture
       captured `shouldBe` ["stdout"]

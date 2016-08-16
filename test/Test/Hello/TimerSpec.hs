@@ -19,9 +19,13 @@ spec = do
     it "should call getCurrentTime twice and stdout the difference" $ do
       let fixture = def
             { _getCurrentTime = get
-            }
+            } :: FixtureState UTCTime
       let passTime = do
-            (UTCTime day secs) <- get
-            put $ UTCTime day (secs + 234)
-      let (diff, _, _) = runTestFixture (measureTime passTime) fixture (UTCTime (ModifiedJulianDay 0) 1000)
+            currentTime <- get
+            put $ currentTime{ utctDayTime = utctDayTime currentTime + 234 }
+      let startTime = UTCTime
+            { utctDay = ModifiedJulianDay 0
+            , utctDayTime = 1000
+            }
+      let (diff, _, _) = runTestFixture (measureTime passTime) fixture startTime
       diff `shouldBe` 234
