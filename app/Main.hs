@@ -1,7 +1,7 @@
-module Main where
+module Main (main) where
 
-import qualified Hello.Main as Hello (main)
-import Hello.App (runApp)
+import Hello.Run (run)
+import Hello.System (io)
 
 main :: IO ()
-main = runApp Hello.main
+main = io run
