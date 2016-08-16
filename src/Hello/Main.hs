@@ -5,8 +5,10 @@ module Hello.Main
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.Timer (Timer(..))
+import Hello.Notifier (Notifier(..))
 
-main :: (Timer m, Greeter m, Configuration m) => m ()
+main :: (Timer m, Greeter m, Configuration m, Notifier m) => m ()
 main = do
   t <- target
-  measureTime $ greet t
+  diff <- measureTime $ greet t
+  timeTaken diff

@@ -10,23 +10,28 @@ import Hello.Main (main)
 import Hello.Configuration (Configuration(..))
 import Hello.Greeter (Greeter(..))
 import Hello.Timer (Timer(..))
+import Hello.Notifier (Notifier(..))
 
-mkFixture "Fixture" [''Configuration, ''Greeter,  ''Timer]
+mkFixture "Fixture" [''Configuration, ''Greeter,  ''Timer, ''Notifier]
 
 spec :: Spec
 spec = do
   describe "main" $ do
     it "should call greet with stubbed target's name" $ do
+      let stubTarget = "NAME"
+      let stubDiff = 100
       let fixture = def
             { _target = do
-                log "target"
-                return "NAME"
+                return stubTarget
             , _greet = \name -> do
                 log "greet"
-                lift $ name `shouldBe` "NAME"
+                lift $ name `shouldBe` stubTarget
             , _measureTime = \f -> do
-                log "measureTime"
                 f
+                return stubDiff
+            , _timeTaken = \diff -> do
+                log "timeTaken"
+                lift $ diff `shouldBe` stubDiff
             }
       captured <- logTestFixtureT main fixture
-      captured `shouldBe` ["target", "measureTime", "greet"]
+      captured `shouldBe` ["greet", "timeTaken"]

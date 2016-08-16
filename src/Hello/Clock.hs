@@ -4,5 +4,5 @@ module Hello.Clock
 
 import Data.Time.Clock (UTCTime)
 
-class Clock m where
+class Monad m => Clock m where
   getCurrentTime :: m UTCTime
