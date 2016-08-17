@@ -4,8 +4,8 @@ module Hello.FileSystemImpl
 
 import qualified Data.Text.IO as T (readFile)
 import Prelude hiding (readFile)
-import Control.Monad.IO.Class (MonadIO(..))
-import Control.Monad.Error.Class (MonadError(..))
+import Control.Monad.IO.Class (MonadIO(liftIO))
+import Control.Monad.Error.Class (MonadError(throwError))
 import Control.Exception.Safe (MonadCatch, catchIOError)
 import Data.Text (Text)
 import Data.Text.Conversions (fromText)

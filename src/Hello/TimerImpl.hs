@@ -4,7 +4,7 @@ module Hello.TimerImpl
 
 import Data.Time.Clock (diffUTCTime, NominalDiffTime)
 
-import Hello.Clock (Clock(..))
+import Hello.Clock (Clock(getCurrentTime))
 
 measureTime :: Clock m => m () -> m NominalDiffTime
 measureTime f = do

@@ -9,13 +9,13 @@ import Control.Exception.Safe (MonadCatch, MonadThrow)
 import Control.Monad.Except (ExceptT(..), runExceptT)
 import Data.Text (Text, unpack)
 
-import qualified Hello.ConsoleImpl as Impl
-import qualified Hello.ClockImpl as Impl
-import qualified Hello.ConfigurationImpl as Impl
-import qualified Hello.GreeterImpl as Impl
-import qualified Hello.FileSystemImpl as Impl
-import qualified Hello.NotifierImpl as Impl
-import qualified Hello.TimerImpl as Impl
+import qualified Hello.ConsoleImpl as Console
+import qualified Hello.ClockImpl as Clock
+import qualified Hello.ConfigurationImpl as Configuration
+import qualified Hello.GreeterImpl as Greeter
+import qualified Hello.FileSystemImpl as FileSystem
+import qualified Hello.NotifierImpl as Notifier
+import qualified Hello.TimerImpl as Timer
 import Hello.Clock (Clock(..))
 import Hello.Console (Console(..))
 import Hello.Configuration (Configuration(..))
@@ -33,23 +33,23 @@ io f = do
   either (error . unpack) return result
 
 instance Clock System where
-  getCurrentTime = Impl.getCurrentTime
+  getCurrentTime = Clock.getCurrentTime
 
 instance Console System where
-  sysArg = Impl.sysArg
-  stdout = Impl.stdout
+  sysArg = Console.sysArg
+  stdout = Console.stdout
 
 instance Configuration System where
-  target = Impl.target
+  target = Configuration.target
 
 instance FileSystem System where
-  readFile = Impl.readFile
+  readFile = FileSystem.readFile
 
 instance Greeter System where
-  greet = Impl.greet
+  greet = Greeter.greet
 
 instance Notifier System where
-  timeTaken = Impl.timeTaken
+  timeTaken = Notifier.timeTaken
 
 instance Timer System where
-  measureTime = Impl.measureTime
+  measureTime = Timer.measureTime
