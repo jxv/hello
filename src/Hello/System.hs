@@ -28,8 +28,8 @@ newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
 
 io :: System a -> IO a
-io f = do
-  result <- runExceptT (unSystem f)
+io system = do
+  result <- runExceptT (unSystem system)
   either (error . unpack) return result
 
 instance Clock System where
