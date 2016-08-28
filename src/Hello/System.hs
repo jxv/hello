@@ -1,6 +1,6 @@
 module Hello.System
   ( System
-  , io
+  , runIO
   ) where
 
 import Control.Monad.Error.Class (MonadError)
@@ -27,8 +27,8 @@ import Hello.Timer (Timer(..))
 newtype System a = System { unSystem :: ExceptT Text IO a }
   deriving (Functor, Applicative, Monad, MonadIO, MonadError Text, MonadCatch, MonadThrow)
 
-io :: System a -> IO a
-io system = do
+runIO :: System a -> IO a
+runIO system = do
   result <- runExceptT (unSystem system)
   either (error . unpack) return result
 

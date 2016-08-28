@@ -29,7 +29,7 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    Hello.Run
+    Hello.Main
     Hello.System
     Hello.Clock
     Hello.ClockImpl
