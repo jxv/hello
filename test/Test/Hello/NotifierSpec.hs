@@ -8,7 +8,7 @@ import Data.Time.Clock (NominalDiffTime)
 import Test.Hspec
 
 import Hello.NotifierImpl (timeTaken)
-import Hello.Console (Console(..))
+import Hello.Parts (Console(..))
 
 mkFixture "Fixture" [''Console]
 

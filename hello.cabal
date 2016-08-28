@@ -31,19 +31,13 @@ library
   exposed-modules:
     Hello.Main
     Hello.System
-    Hello.Clock
+    Hello.Parts
     Hello.ClockImpl
-    Hello.Configuration
     Hello.ConfigurationImpl
-    Hello.Console
     Hello.ConsoleImpl
-    Hello.Notifier
     Hello.NotifierImpl
-    Hello.FileSystem
     Hello.FileSystemImpl
-    Hello.Greeter
     Hello.GreeterImpl
-    Hello.Timer
     Hello.TimerImpl
   build-depends:
       base >= 4.7 && < 5

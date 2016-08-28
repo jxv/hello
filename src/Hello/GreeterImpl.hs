@@ -4,7 +4,7 @@ module Hello.GreeterImpl
 
 import Data.Text (Text)
 
-import Hello.Console (Console(stdout))
+import Hello.Parts (Console(stdout))
 
 greet :: Console m => Text -> m ()
 greet name = stdout $ "Hello, " `mappend` name `mappend` "!"
