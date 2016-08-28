@@ -1,4 +1,4 @@
-module Test.Hello.RunSpec (spec) where
+module Test.Hello.MainSpec (spec) where
 
 import Prelude hiding (log)
 import Control.Monad.Trans.Class (lift)
@@ -6,11 +6,8 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import Hello.Run (run)
-import Hello.Configuration (Configuration(..))
-import Hello.Greeter (Greeter(..))
-import Hello.Timer (Timer(..))
-import Hello.Notifier (Notifier(..))
+import Hello.Main (main)
+import Hello.Parts (Configuration(..), Greeter(..), Timer(..), Notifier(..))
 
 mkFixture "Fixture" [''Configuration, ''Greeter,  ''Timer, ''Notifier]
 
@@ -33,5 +30,5 @@ spec = do
                 log "timeTaken"
                 lift $ diff `shouldBe` stubDiff
             }
-      captured <- logTestFixtureT run fixture
+      captured <- logTestFixtureT main fixture
       captured `shouldBe` ["greet", "timeTaken"]

@@ -9,7 +9,7 @@ import Data.Time.Calendar (Day(..))
 import Test.Hspec
 
 import Hello.TimerImpl (measureTime)
-import Hello.Clock (Clock(..))
+import Hello.Parts (Clock(..))
 
 mkFixture "Fixture" [''Clock]
 

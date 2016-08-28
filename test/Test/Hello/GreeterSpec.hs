@@ -7,7 +7,7 @@ import Control.Monad.TestFixture.TH
 import Test.Hspec
 
 import Hello.GreeterImpl (greet)
-import Hello.Console (Console(..))
+import Hello.Parts (Console(..))
 
 mkFixture "Fixture" [''Console]
 

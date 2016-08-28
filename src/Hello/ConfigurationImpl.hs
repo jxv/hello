@@ -7,8 +7,7 @@ import qualified Data.Text as T (null, init)
 import Prelude hiding (readFile)
 import Data.Text (Text)
 
-import Hello.Console (Console(sysArg))
-import Hello.FileSystem (FileSystem(readFile))
+import Hello.Parts (Console(sysArg), FileSystem(readFile))
 
 target :: (Console m, FileSystem m) => m Text
 target = do
