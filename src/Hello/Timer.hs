@@ -1,10 +1,10 @@
-module Hello.TimerImpl
+module Hello.Timer
   ( measureTime
   ) where
 
 import Data.Time.Clock (diffUTCTime, NominalDiffTime)
 
-import Hello.Parts (Clock(getCurrentTime))
+import Hello.Classes (Clock(getCurrentTime))
 
 measureTime :: Clock m => m () -> m NominalDiffTime
 measureTime f = do

@@ -7,7 +7,7 @@ import Control.Monad.TestFixture.TH
 import Test.Hspec
 
 import Hello.Main (main)
-import Hello.Parts (Configuration(..), Greeter(..), Timer(..), Notifier(..))
+import Hello.Classes (Configuration(..), Greeter(..), Timer(..), Notifier(..))
 
 mkFixture "Fixture" [''Configuration, ''Greeter,  ''Timer, ''Notifier]
 

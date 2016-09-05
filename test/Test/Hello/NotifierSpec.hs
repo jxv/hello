@@ -7,8 +7,8 @@ import Control.Monad.TestFixture.TH
 import Data.Time.Clock (NominalDiffTime)
 import Test.Hspec
 
-import Hello.NotifierImpl (timeTaken)
-import Hello.Parts (Console(..))
+import Hello.Notifier (timeTaken)
+import Hello.Classes (Console(..))
 
 mkFixture "Fixture" [''Console]
 

@@ -1,4 +1,4 @@
-module Hello.ConfigurationImpl
+module Hello.Configuration
   ( target
   , initText
   ) where
@@ -7,7 +7,7 @@ import qualified Data.Text as T (null, init)
 import Prelude hiding (readFile)
 import Data.Text (Text)
 
-import Hello.Parts (Console(sysArg), FileSystem(readFile))
+import Hello.Classes (Console(sysArg), FileSystem(readFile))
 
 target :: (Console m, FileSystem m) => m Text
 target = do

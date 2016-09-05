@@ -1,4 +1,4 @@
-module Hello.ConsoleImpl
+module Hello.Console
   ( sysArg
   , stdout
   ) where
