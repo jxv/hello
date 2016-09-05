@@ -8,8 +8,8 @@ import Data.Time.Clock (UTCTime(..))
 import Data.Time.Calendar (Day(..))
 import Test.Hspec
 
-import Hello.TimerImpl (measureTime)
-import Hello.Parts (Clock(..))
+import Hello.Timer (measureTime)
+import Hello.Classes (Clock(..))
 
 mkFixture "Fixture" [''Clock]
 

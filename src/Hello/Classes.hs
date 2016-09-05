@@ -1,4 +1,4 @@
-module Hello.Parts
+module Hello.Classes
   ( Clock(..)
   , Configuration(..)
   , Console(..)

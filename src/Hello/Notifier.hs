@@ -1,11 +1,11 @@
-module Hello.NotifierImpl
+module Hello.Notifier
   ( timeTaken
   ) where
 
 import Data.Text.Conversions (toText)
 import Data.Time.Clock (NominalDiffTime)
 
-import Hello.Parts (Console(stdout))
+import Hello.Classes (Console(stdout))
 
 timeTaken :: Console m => NominalDiffTime -> m ()
 timeTaken = stdout . toText . show

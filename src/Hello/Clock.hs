@@ -1,4 +1,4 @@
-module Hello.ClockImpl
+module Hello.Clock
   ( getCurrentTime
   ) where
 

@@ -1,4 +1,4 @@
-module Hello.FileSystemImpl
+module Hello.FileSystem
   ( readFile
   ) where
 

@@ -30,15 +30,15 @@ library
     src
   exposed-modules:
     Hello.Main
-    Hello.System
-    Hello.Parts
-    Hello.ClockImpl
-    Hello.ConfigurationImpl
-    Hello.ConsoleImpl
-    Hello.NotifierImpl
-    Hello.FileSystemImpl
-    Hello.GreeterImpl
-    Hello.TimerImpl
+    Hello.Monad
+    Hello.Classes
+    Hello.Clock
+    Hello.Configuration
+    Hello.Console
+    Hello.Notifier
+    Hello.FileSystem
+    Hello.Greeter
+    Hello.Timer
   build-depends:
       base >= 4.7 && < 5
     , text

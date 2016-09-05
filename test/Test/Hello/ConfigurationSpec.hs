@@ -6,8 +6,8 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import Hello.ConfigurationImpl (target, initText)
-import Hello.Parts (Console(..), FileSystem(..))
+import Hello.Configuration (target, initText)
+import Hello.Classes (Console(..), FileSystem(..))
 
 mkFixture "Fixture" [''Console, ''FileSystem]
 
