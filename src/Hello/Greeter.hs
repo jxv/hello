@@ -1,10 +1,14 @@
 module Hello.Greeter
-  ( greet
+  ( Greeter(..)
+  , greet'
   ) where
 
 import Data.Text (Text)
 
-import Hello.Classes (Console(stdout))
+import Hello.Console (Console(stdout))
 
-greet :: Console m => Text -> m ()
-greet name = stdout $ "Hello, " `mappend` name `mappend` "!"
+class Monad m => Greeter m where
+  greet :: Text -> m ()
+
+greet' :: Console m => Text -> m ()
+greet' name = stdout $ "Hello, " `mappend` name `mappend` "!"

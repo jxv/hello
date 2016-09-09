@@ -1,11 +1,15 @@
 module Hello.Notifier
-  ( timeTaken
+  ( Notifier(..)
+  , timeTaken'
   ) where
 
 import Data.Text.Conversions (toText)
 import Data.Time.Clock (NominalDiffTime)
 
-import Hello.Classes (Console(stdout))
+import Hello.Console (Console(stdout))
 
-timeTaken :: Console m => NominalDiffTime -> m ()
-timeTaken = stdout . toText . show
+class Monad m => Notifier m where
+  timeTaken :: NominalDiffTime -> m ()
+
+timeTaken' :: Console m => NominalDiffTime -> m ()
+timeTaken' = stdout . toText . show

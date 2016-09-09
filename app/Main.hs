@@ -1,7 +1,7 @@
-module Main (main) where
+module Main where
 
 import qualified Hello.Main as Hello (main)
-import qualified Hello.Monad as Hello (runIO)
+import Hello.Monad (runHello)
 
 main :: IO ()
-main = Hello.runIO Hello.main
+main = runHello Hello.main

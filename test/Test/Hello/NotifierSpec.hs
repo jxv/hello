@@ -7,8 +7,9 @@ import Control.Monad.TestFixture.TH
 import Data.Time.Clock (NominalDiffTime)
 import Test.Hspec
 
-import Hello.Notifier (timeTaken)
-import Hello.Classes (Console(..))
+import Hello.Notifier (timeTaken')
+
+import Hello.Console (Console)
 
 mkFixture "Fixture" [''Console]
 
@@ -21,5 +22,5 @@ spec = do
                 log "stdout"
                 lift $ msg `shouldBe` "0s"
             }
-      captured <- logTestFixtureT (timeTaken 0) fixture
+      captured <- logTestFixtureT (timeTaken' 0) fixture
       captured `shouldBe` ["stdout"]

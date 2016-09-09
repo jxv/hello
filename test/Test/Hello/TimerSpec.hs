@@ -8,8 +8,9 @@ import Data.Time.Clock (UTCTime(..))
 import Data.Time.Calendar (Day(..))
 import Test.Hspec
 
-import Hello.Timer (measureTime)
-import Hello.Classes (Clock(..))
+import Hello.Timer (measureTime')
+
+import Hello.Clock (Clock)
 
 mkFixture "Fixture" [''Clock]
 
@@ -27,5 +28,5 @@ spec = do
             { utctDay = ModifiedJulianDay 0
             , utctDayTime = 1000
             }
-      let (diff, _, _) = runTestFixture (measureTime passTime) fixture startTime
+      let (diff, _, _) = runTestFixture (measureTime' passTime) fixture startTime
       diff `shouldBe` 234

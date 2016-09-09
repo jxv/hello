@@ -31,7 +31,6 @@ library
   exposed-modules:
     Hello.Main
     Hello.Monad
-    Hello.Classes
     Hello.Clock
     Hello.Configuration
     Hello.Console

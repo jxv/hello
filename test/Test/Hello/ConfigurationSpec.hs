@@ -6,8 +6,10 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import Hello.Configuration (target, initText)
-import Hello.Classes (Console(..), FileSystem(..))
+import Hello.Configuration (target', initText)
+
+import Hello.Console (Console)
+import Hello.FileSystem (FileSystem)
 
 mkFixture "Fixture" [''Console, ''FileSystem]
 
@@ -29,5 +31,5 @@ spec = do
                 lift $ filePath `shouldBe` "file.txt"
                 return "contents\n"
             }
-      contents <- unTestFixtureT target fixture
+      contents <- unTestFixtureT target' fixture
       contents `shouldBe` "contents"

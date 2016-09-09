@@ -1,5 +1,6 @@
 module Hello.Configuration
-  ( target
+  ( Configuration(..)
+  , target'
   , initText
   ) where
 
@@ -7,10 +8,14 @@ import qualified Data.Text as T (null, init)
 import Prelude hiding (readFile)
 import Data.Text (Text)
 
-import Hello.Classes (Console(sysArg), FileSystem(readFile))
+import Hello.Console (Console(sysArg))
+import Hello.FileSystem (FileSystem(readFile))
 
-target :: (Console m, FileSystem m) => m Text
-target = do
+class Monad m => Configuration m where
+  target :: m Text
+
+target' :: (Console m, FileSystem m) => m Text
+target' = do
   filePath <- sysArg
   contents <- readFile filePath
   return $ initText contents
