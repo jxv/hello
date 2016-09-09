@@ -1,13 +1,17 @@
 module Hello.Timer
-  ( measureTime
+  ( Timer(..)
+  , measureTime'
   ) where
 
 import Data.Time.Clock (diffUTCTime, NominalDiffTime)
 
-import Hello.Classes (Clock(getCurrentTime))
+import Hello.Clock (Clock(getCurrentTime))
 
-measureTime :: Clock m => m () -> m NominalDiffTime
-measureTime f = do
+class Monad m => Timer m where
+  measureTime :: m () -> m NominalDiffTime
+
+measureTime' :: Clock m => m () -> m NominalDiffTime
+measureTime' f = do
   before <- getCurrentTime
   f
   after <- getCurrentTime

@@ -1,5 +1,6 @@
 module Hello.FileSystem
-  ( readFile
+  ( FileSystem(..)
+  , readFile'
   ) where
 
 import qualified Data.Text.IO as T (readFile)
@@ -10,8 +11,11 @@ import Control.Exception.Safe (MonadCatch, catchIOError)
 import Data.Text (Text)
 import Data.Text.Conversions (fromText)
 
-readFile :: (MonadIO m, MonadError Text m, MonadCatch m) => Text -> m Text
-readFile filePath = let
+class Monad m => FileSystem m where
+  readFile :: Text -> m Text
+
+readFile' :: (MonadIO m, MonadError Text m, MonadCatch m) => Text -> m Text
+readFile' filePath = let
   try = T.readFile $ fromText filePath
   recover _ = throwError $ "no file: " `mappend` filePath
   in catchIOError (liftIO try) recover

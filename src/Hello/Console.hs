@@ -1,6 +1,7 @@
 module Hello.Console
-  ( sysArg
-  , stdout
+  ( Console(..)
+  , sysArg'
+  , stdout'
   ) where
 
 import qualified Data.Text.IO as T (putStrLn)
@@ -10,12 +11,16 @@ import Control.Monad.IO.Class (MonadIO(liftIO))
 import Control.Monad.Error.Class (MonadError(throwError))
 import System.Environment (getArgs)
 
-sysArg :: (MonadIO m, MonadError Text m) => m Text
-sysArg = do
+class Monad m => Console m where
+  sysArg :: m Text
+  stdout :: Text -> m ()
+
+sysArg' :: (MonadIO m, MonadError Text m) => m Text
+sysArg' = do
   args <- liftIO getArgs
   case args of
     (arg:_) -> return $ toText arg
     _ -> throwError "no argument"
 
-stdout :: MonadIO m => Text -> m ()
-stdout = liftIO . T.putStrLn
+stdout' :: MonadIO m => Text -> m ()
+stdout' = liftIO . T.putStrLn

@@ -6,8 +6,9 @@ import Control.Monad.TestFixture
 import Control.Monad.TestFixture.TH
 import Test.Hspec
 
-import Hello.Greeter (greet)
-import Hello.Classes (Console(..))
+import Hello.Greeter (greet')
+
+import Hello.Console (Console)
 
 mkFixture "Fixture" [''Console]
 
@@ -21,5 +22,5 @@ spec = do
                 lift $ msg `shouldBe` ("Hello, " `mappend` stubName `mappend` "!")
                 log "stdout"
             }
-      captured <- logTestFixtureT (greet stubName) fixture
+      captured <- logTestFixtureT (greet' stubName) fixture
       captured `shouldBe` ["stdout"]
